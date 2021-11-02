@@ -21,9 +21,12 @@ exec --no-startup-id "sudo tlp start"
 # The combination of xss-lock, nm-applet and pactl 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-#exec --no-startup-id nm-applet
+exec_always --no-startup-id "nm-applet"
+# Enables wifi on startup, fixing "WiFi Disabled" in nm-applet
+exec --no-startup-id "nmcli r wifi on"
 
 # Power Options
+bindsyn $mod+Shift+End exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy -gt ""' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep &
 bindsym $mod+Shift+Delete exec --no-startup-id "systemctl poweroff"
 bindsym $mod+Shift+Insert exec --no-startup-id "systemctl suspend"
 # bindsym $mod+Shift+End exec i3lock -c 0a0a0a
@@ -34,8 +37,8 @@ bindsym XF86Favorites exec "pwgen -cnsy 64 1 | xclip"
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindcode 123 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && $refresh_i3status
-bindcode 122 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && $refresh_i3status
+bindcode 123 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindcode 122 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
 bindcode 121 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindcode 198 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
@@ -59,7 +62,7 @@ bindsym $mod+d exec --no-startup-id dmenu_run -i -fn "JetBrains Mono Nerd Font" 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop -i -fn "JetBrains Mono Nerd Font" -nb "#0a0a0a" -nf "#666" -sb "#0a0a0a" -sf "#fff" 
 
 # change focus
 bindsym $mod+j focus left
@@ -149,11 +152,12 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+c exec "killall dunst; i3-msg reload && notify-send 'i3' 'The i3 configuration file has been reloaded.'"
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r exec "killall dunst; i3-msg restart && notify-send 'i3' 'i3 has been restarted.'"
+
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? -B 'Confirm' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -197,7 +201,7 @@ bar {
     tray_padding 2 
     separator_symbol " | "
     strip_workspace_numbers yes
-    #workspace_min_width 24
+    workspace_min_width 22
 }
 title_align center
 default_border pixel 2  
