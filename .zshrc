@@ -17,3 +17,4 @@ setopt autocd
 unsetopt beep
 bindkey -v
 # End of lines configured by zsh-newuser-install
+PS1=' %F{008}%~/%f $ '
