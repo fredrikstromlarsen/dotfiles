@@ -1,5 +1,4 @@
 # The following lines were added by compinstall
-
 zstyle ':completion:*' completer _expand _complete _ignored _match _correct _approximate
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:]}={[:upper:]}'
@@ -15,6 +14,6 @@ HISTSIZE=1000
 SAVEHIST=1000
 setopt autocd
 unsetopt beep
-bindkey -v
+bindkey -e
 # End of lines configured by zsh-newuser-install
 PS1=' %F{008}%~/%f $ '
