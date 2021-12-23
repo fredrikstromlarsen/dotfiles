@@ -1,0 +1,5 @@
+[
+    { "keys": ["ctrl+tab"], "command": "next_view" },
+    { "keys": ["ctrl+shift+tab"], "command": "prev_view" },
+    { "keys": ["ctrl+shift+s"], "command": "auto_save", "args": {"all_files": true, "backup": true} }
+]
