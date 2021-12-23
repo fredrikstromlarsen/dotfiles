@@ -4,6 +4,8 @@
 set $mod Mod1
 
 exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy -gt ""' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep &
+exec --no-startup-id "pacman -Rs $(pacman -Qtdq)"
+exec --no-startup-id "yay -Rs $(yay -Qtdq)"
 #exec --no-startup-id i3lock-fancy -p
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -12,7 +14,6 @@ exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy -gt ""' -cornerdel
 # font pango:Roboto Mono 9
 font pango: JetBrains Mono Nerd Font 10 
 exec --no-startup-id "xsetroot -solid '#0a0a0a'"
-exec --no-startup-id "sudo tlp start"
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -21,16 +22,17 @@ exec --no-startup-id "sudo tlp start"
 # The combination of xss-lock, nm-applet and pactl 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec_always --no-startup-id "nm-applet"
+exec --no-startup-id "nm-applet"
 # Enables wifi on startup, fixing "WiFi Disabled" in nm-applet
 exec --no-startup-id "nmcli r wifi on"
 
 # Power Options
-bindsyn $mod+Shift+End exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy -gt ""' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep &
 bindsym $mod+Shift+Delete exec --no-startup-id "systemctl poweroff"
 bindsym $mod+Shift+Insert exec --no-startup-id "systemctl suspend"
 # bindsym $mod+Shift+End exec i3lock -c 0a0a0a
 bindsym $mod+Shift+End exec "i3lock-fancy -gt ''" 
+
+exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy -gt ""' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep
 
 # Generate Password and Send to Clipboard
 bindsym XF86Favorites exec "pwgen -cnsy 64 1 | xclip"
@@ -51,7 +53,7 @@ bindsym Control+Escape exec xbacklight -set 0
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec terminator
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -204,7 +206,8 @@ bar {
     workspace_min_width 22
 }
 title_align center
-default_border pixel 2  
+default_border none
+# default_border pixel 2  
 hide_edge_borders both
 no_focus [window_role="pop-up"]
 focus_follows_mouse no
