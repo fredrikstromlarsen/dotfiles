@@ -1,16 +1,20 @@
 # i3 config file (v4)
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
-exec --no-startup-id xautolock -time 10 -locker 'i3lock-fancy-rapid 50 4 -f' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep &
-exec --no-startup-id "pacman -Rs $(pacman -Qtdq)"
-exec --no-startup-id "yay -Rs $(yay -Qtdq)"
+exec --no-startup-id xautolock -time 10 -locker 'xbacklight -set 1 && i3lock -c 000000 -f' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep &
+exec --no-startup-id "sudo pacman -Qtdq | sudo pacman -Rns -"
+exec --no-startup-id "yay -Qtdq | yay -Rns -"
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
+# font pango:Open Sans 9
+# font pango:Roboto Mono 9
 font pango: JetBrains Mono Nerd Font 10 
 exec --no-startup-id "xsetroot -solid '#0a0a0a'"
-exec --no-startup-id "xset r rate 150 75"
+exec --no-startup-id "xset r rate 300 50"
+exec --no-startup-id "setxkbmap no -option caps:escape"
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -22,15 +26,14 @@ exec --no-startup-id "xset r rate 150 75"
 exec --no-startup-id "nm-applet"
 # Enables wifi on startup, fixing "WiFi Disabled" in nm-applet
 exec --no-startup-id "nmcli r wifi on"
-exec --no-startup-id "flameshot"
 
 # Power Options
 bindsym $mod+Shift+Delete exec --no-startup-id "systemctl poweroff"
 bindsym $mod+Shift+Insert exec --no-startup-id "systemctl suspend"
-bindsym $mod+Shift+End exec "i3lock-fancy-rapid 50 4 -f" 
+bindsym $mod+Shift+End exec "xbacklight -set 1 && i3lock-fancy-rapid 10 2 -f" 
 
 # Generate Password and Send to Clipboard
-# bindsym XF86Favorites exec "pwgen -cnsy 64 1 | xclip"
+bindsym XF86Favorites exec "pwgen -cnsy 64 1 | xclip"
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -40,9 +43,9 @@ bindcode 121 exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $
 bindcode 198 exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Sreen brightness controls
-# bindcode 233 exec xbacklight -inc 10 
-# bindcode 232 exec xbacklight -dec 10 
-# bindsym Control+Escape exec xbacklight -set 0 
+bindcode 233 exec xbacklight -inc 10 
+bindcode 232 exec xbacklight -dec 10 
+bindsym Control+Escape exec xbacklight -set 0 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -54,12 +57,9 @@ bindsym $mod+Return exec terminator
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'JetBrains Mono Nerd Font' -nb '#0a0a0a' -nf '#666' -sb '#0a0a0a' -sf '#fff'"
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --term="terminator" --dmenu="dmenu -i -fn 'JetBrains Mono Nerd Font' -nb '#0a0a0a' -nf '#666' -sb '#0a0a0a' -sf '#fff'"
 # bindsym $mod+d exec --no-startup-id dmenu_run -i -fn "JetBrains Mono Nerd Font" -nb "#0a0a0a" -nf "#666" -sb "#0a0a0a" -sf "#fff" 
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -107,6 +107,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# focus the child container
+#bindsym $mod+d focus child
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -150,7 +153,7 @@ bindsym $mod+Shift+c exec "killall dunst; i3-msg reload && notify-send 'i3' 'The
 bindsym $mod+Shift+r exec "killall dunst; i3-msg restart && notify-send 'i3' 'i3 has been restarted.'"
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3? -B 'Confirm' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-msg exit
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -198,7 +201,7 @@ bar {
 }
 title_align center
 default_border none
-default_border pixel 2
+# default_border pixel 2  
 hide_edge_borders both
 no_focus [window_role="pop-up"]
 focus_follows_mouse no
@@ -208,6 +211,7 @@ exec --no-startup-id xsetroot -solid "#0a0a0a"
 
 # Launch as floating window
 for_window [class=(?i)qalculate.gtk] floating enable
+for_window [class=(?i)qalculate] floating enable
 for_window [class=(?i)qalc] floating enable
 
 # class                 border  backgr. text    indicator child_border
