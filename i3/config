@@ -1,31 +1,33 @@
-# i3 config file (v4)
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-
 set $mod Mod4
 
+# Start screenlocker after 10 minutes if cursor not in upper left corner, and not in sleep mode
 exec --no-startup-id xautolock -time 10 -locker 'xbacklight -set 1 && i3lock -c 000000 -f' -cornerdelay 5 -corners -+-- -cornersize 10 -detectsleep &
+
+# Purge orphaned packages
 exec --no-startup-id "sudo pacman -Qtdq | sudo pacman -Rns -"
 exec --no-startup-id "yay -Qtdq | yay -Rns -"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:Open Sans 9
-# font pango:Roboto Mono 9
 font pango: JetBrains Mono Nerd Font 10 
+
+# Set background color
 exec --no-startup-id "xsetroot -solid '#0a0a0a'"
+
+# Set key hold input delay
 exec --no-startup-id "xset r rate 300 50"
+
+# Set Norwegian keyboardmap, and bind escape to caps lock
 exec --no-startup-id "setxkbmap no -option caps:escape"
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# The combination of xss-lock, nm-applet and pactl 
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
+# Start networkmanager tray applet
 exec --no-startup-id "nm-applet"
+
 # Enables wifi on startup, fixing "WiFi Disabled" in nm-applet
 exec --no-startup-id "nmcli r wifi on"
+
+# Start bluetooth applet
+exec --no-startup-id "blueberry-tray"
 
 # Power Options
 bindsym $mod+Shift+Delete exec --no-startup-id "systemctl poweroff"
@@ -35,7 +37,7 @@ bindsym $mod+Shift+End exec "xbacklight -set 1 && i3lock-fancy-rapid 10 2 -f"
 # Generate Password and Send to Clipboard
 bindsym XF86Favorites exec "pwgen -cnsy 64 1 | xclip"
 
-# Use pactl to adjust volume in PulseAudio.
+# Use pactl to adjust volume with function keys in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindcode 123 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
 bindcode 122 exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
@@ -60,54 +62,54 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --term="terminator" --dmenu="dmenu -i -fn 'JetBrains Mono Nerd Font' -nb '#0a0a0a' -nf '#666' -sb '#0a0a0a' -sf '#fff'"
 # bindsym $mod+d exec --no-startup-id dmenu_run -i -fn "JetBrains Mono Nerd Font" -nb "#0a0a0a" -nf "#666" -sb "#0a0a0a" -sf "#fff" 
 
-# change focus
+# Change Focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+oslash focus right
 
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
+# Move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
 bindsym $mod+Shift+oslash move right
 
-# alternatively, you can use the cursor keys:
+# Alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# Split in horizontal orientation
 bindsym $mod+h split h
 
-# split in vertical orientation
+# Split in vertical orientation
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
+# Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
+# Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
+# Focus the parent container
 bindsym $mod+a focus parent
 
-# focus the child container
+# Focus the child container
 #bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
@@ -206,9 +208,6 @@ hide_edge_borders both
 no_focus [window_role="pop-up"]
 focus_follows_mouse no
 
-#exec_always --no-startup-id /usr/bin/feh --bg-fill ~/Pictures/bg/ -z
-exec --no-startup-id xsetroot -solid "#0a0a0a"
-
 # Launch as floating window
 for_window [class=(?i)qalculate.gtk] floating enable
 for_window [class=(?i)qalculate] floating enable
@@ -220,5 +219,4 @@ client.focused_inactive #0a0a0a #0a0a0a #ffffff #333333   #0a0a0a
 client.unfocused        #0a0a0a #0a0a0a #666666 #111111   #0a0a0a
 client.urgent           #660a0a #660a0a #eeeeee #111111   #0a0a0a
 client.placeholder      #0a0a0a #0a0a0a #eeeeee #111111   #0a0a0a
-
 client.background       #0a0a0a
