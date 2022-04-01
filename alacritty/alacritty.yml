@@ -1,4 +1,7 @@
-# Configuration for Alacritty, the GPU enhanced terminal emulator.
+# Configuration for Alacritty, the GPU enhanced terminal emulator.lthough your vi may just be a link to vim, it may be configured to behave like the "original" vi and thus disables the arrow keys. Just invoke vim directly.
+# Share
+# Improve this answer
+# Follow
 
 # Import additional configuration files
 #
