@@ -1,0 +1,32 @@
+hint_activation_key: A-C-q
+hint_activation_oneshot_key: A-C-a
+
+
+grid_activation_key: A-C-w
+activation_key: A-C-e
+screen_activation_key: A-C-z
+
+up: i
+left: j
+down: k
+right: l
+
+speed: 150
+max_speed: 5000
+acceleration: 500
+accelerator_acceleration: 2000
+accelerator: a
+
+cursor_color: #ffffff
+
+grid_color: #aaaaaa
+grid_size: 1
+grid_border_size: 1
+
+hint_bgcolor: #0a0a0a
+hint_fgcolor: #666666
+hint_size: 18
+hint_border_radius: 0
+
+scroll_up: w
+scroll_down: s
