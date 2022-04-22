@@ -27,4 +27,4 @@ cp ~/.bashrc .
 7z a fonts/fonts.7z /usr/share/fonts/TTF/*
 
 # Warpd
-cp ~/.config/warpd/ . -r
+cp ~/.config/warpd/config ./warpd/

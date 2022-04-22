@@ -6,14 +6,14 @@
   title_inactive_bg_color = "#0a0a0a"
   inactive_color_offset = 1.0
   title_use_system_font = False
-  title_font = JetBrainsMono NF 18
+  title_font = JetBrains Mono Nerd Font 18
 [keybindings]
 [profiles]
   [[default]]
     background_color = "#0a0a0a"
     cursor_shape = ibeam
     cursor_color = "#aaaaaa"
-    font = JetBrainsMono Nerd Font Mono 16
+    font = JetBrains Mono Nerd Font 16
     foreground_color = "#eeeeee"
     show_titlebar = False
     scrollbar_position = hidden
@@ -27,5 +27,4 @@
     [[[child1]]]
       type = Terminal
       parent = window0
-      profile = default
 [plugins]

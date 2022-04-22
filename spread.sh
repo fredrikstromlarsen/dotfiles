@@ -1,30 +1,30 @@
 #!/bin/bash
 
 # Vim
-sudo mv .vim ~
-mv .vimrc ~
+sudo cp .vim/* ~/.vim
+cp .vimrc ~/.vimrc
 
 # Alacritty
-#mv alacritty ~/.config/alacritty/
+#cp alacritty ~/.config/alacritty/
 
 # Dunst
-mv dunst/ ~/.config/
+cp dunst/* ~/.config/dunst/
 
 # i3
-mv i3/config ~/.config/i3
-sudo mv i3/i3status.conf /etc/i3status.conf
+cp i3/config ~/.config/i3
+sudo cp i3/i3status.conf /etc/i3status.conf
 
 # Terminator
-mv terminator/ ~/.config
+cp terminator/* ~/.config/terminator
 
 # Bash
-mv .bashrc ~/.bashrc
+cp .bashrc ~/.bashrc
 
 # ZSH
-#mv .zshrc ~
+#cp .zshrc ~
+
+# Warpd
+cp warpd/config ~/.config/warpd/
 
 # Fonts
 sudo 7z x fonts/fonts.7z -o/usr/share/fonts/TTF
-
-# Warpd
-mv warpd/ ~/.config
