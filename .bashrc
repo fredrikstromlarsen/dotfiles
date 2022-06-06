@@ -181,10 +181,9 @@ _Pacdiff() {
 
 #------------------------------------------------------------
 
-## Aliases for the functions above.
-## Uncomment an alias if you want to use it.
-##
+alias sudo='doas'
+alias sudoedit='doas rnano'
+alias pacman='pacman --noconfirm'
+alias vim="nvim"
 
-# alias ef='_open_files_for_editing'     # 'ef' opens given file(s) for editing
-# alias pacdiff=_Pacdiff
-################################################################################
+complete -cf doas

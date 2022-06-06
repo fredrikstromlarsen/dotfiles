@@ -26,5 +26,8 @@ cp .bashrc ~/.bashrc
 # Warpd
 cp warpd/config ~/.config/warpd/
 
+# Neovim
+cp nvim/init.vim ~/.config/nvim
+
 # Fonts
 sudo 7z x fonts/fonts.7z -o/usr/share/fonts/TTF

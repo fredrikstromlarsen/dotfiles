@@ -14,7 +14,9 @@ exec --no-startup-id "setxkbmap no && setxkbmap -option caps:escape"
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango: JetBrains Mono Nerd Font 11 
+#font pango: JetBrains Mono Nerd Font 11 
+font pango: RobotoMono Nerd Font 12 
+
 exec --no-startup-id "xset r rate 250 50"
 exec_always --no-startup-id "nm-applet"
 exec --no-startup-id "nmcli r wifi on"
@@ -30,7 +32,6 @@ exec --no-startup-id "killall warpd; warpd"
 #
 # Power Options
 bindsym $mod+Shift+Delete exec --no-startup-id "systemctl poweroff"
-bindsym $mod+Shift+Insert exec --no-startup-id "systemctl suspend"
 bindsym $mod+Shift+End exec "i3lock -efc 000000"
 
 # Generate Password and Send to Clipboard

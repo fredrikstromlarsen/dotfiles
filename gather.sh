@@ -28,3 +28,6 @@ cp ~/.bashrc .
 
 # Warpd
 cp ~/.config/warpd/config ./warpd/
+
+# Neovim
+cp ~/.config/nvim/init.vim ./nvim

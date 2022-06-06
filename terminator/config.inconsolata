@@ -1,0 +1,30 @@
+[global_config]
+  window_state = maximise
+  title_hide_sizetext = True
+  title_transmit_bg_color = "#0a0a0a"
+  title_inactive_fg_color = "#deddda"
+  title_inactive_bg_color = "#0a0a0a"
+  inactive_color_offset = 1.0
+  title_use_system_font = False
+  title_font = Inconsolata Nerd Font 18
+[keybindings]
+[profiles]
+  [[default]]
+    background_color = "#0a0a0a"
+    cursor_shape = ibeam
+    cursor_color = "#aaaaaa"
+    font = Inconsolata Nerd Font 22
+    foreground_color = "#eeeeee"
+    show_titlebar = False
+    scrollbar_position = hidden
+    use_system_font = False
+    bold_is_bright = True
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
